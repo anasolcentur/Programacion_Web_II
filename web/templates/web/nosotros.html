@@ -1,0 +1,50 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+{% endblock %}
+{% block content %}
+<section class="historia">
+    <div class="container historia-flex">
+        <div class="historia-img">
+            <img src="{% static 'web/img/equipo.jpg' %}" alt="Nuestro equipo">
+        </div>
+        <div class="historia-content">
+            <h2 class="section-title">Nuestra Historia</h2>
+            <p>
+                Fundada en 2010, nuestra firma nació con el objetivo de brindar soluciones legales y contables integrales a empresas que buscan crecer de forma segura y sostenible.
+            </p>
+            <p>
+                Nuestro compromiso con la excelencia, la transparencia y el profesionalismo nos ha convertido en un aliado estratégico para empresas de todos los tamaños.
+            </p>
+            <blockquote class="fundador-cita">
+                “Creemos en acompañar a nuestros clientes con compromiso y cercanía, porque su crecimiento es también el nuestro.”
+                <footer>— Laura Méndez, Fundadora</footer>
+            </blockquote>
+        </div>
+    </div>
+
+ <div class="equipo">
+    <h2>Equipo Profesional</h2>
+    <div class="miembros">
+        <div class="miembro">
+            <img src="{% static 'web/img/laura.jpg' %}" alt="Laura Méndez">
+            <h3>Laura Méndez</h3>
+            <p>Fundadora y Directora General</p>
+        </div>
+        <div class="miembro">
+            <img src="{% static 'web/img/javier.jpg' %}" alt="Javier Suárez">
+            <h3>Javier Suárez</h3>
+            <p>Contador Público</p>
+        </div>
+        <div class="miembro">
+            <img src="{% static 'web/img/marcos.jpg' %}" alt="Marcos García">
+            <h3>Marcos García</h3>
+            <p>Asesor Legal</p>
+        </div>
+    </div>
+</div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Empresarial Norte</title>
+
+    <!-- Tipografías y estilos globales -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">Grupo Empresarial Norte</div>
+            <nav class="navbar">
+                <a href="{% url 'index' %}">Inicio</a>
+                <a href="{% url 'servicios' %}">Servicios</a>
+                <a href="{% url 'nosotros' %}">Nosotros</a>
+                <a href="{% url 'contacto' %}">Contacto</a>
+
+     {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn-link">Cerrar sesión</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="login-highlight">Iniciar sesión</a>
+    {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-flex">
+            <!-- Contacto -->
+            <div class="footer-contacto">
+                <h4>Contacto</h4>
+                <p><strong>Tel:</strong> (011) 1234-5678</p>
+                <p><strong>Email:</strong> contacto@tufirma.com</p>
+                <p><strong>Dirección:</strong> dirección de la firma</p>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="footer-social">
+                <h4>Seguinos</h4>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://wa.me/541112345678" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <p class="footer-copy">© 2025 Tu Firma. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+

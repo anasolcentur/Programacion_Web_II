@@ -1,0 +1,36 @@
+
+:root {
+    --azul-oscuro: #002D62;
+    --azul-claro: #1A6FA8;
+    --gris-claro: #F1F1F1;
+    --gris-medio: #CCCCCC;
+    --tipografia-titulo: 'Merriweather', serif;
+    --tipografia-texto: 'Lato', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--tipografia-texto);
+    background-color: white;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.section-title {
+    font-family: var(--tipografia-titulo);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--azul-oscuro);
+    text-align: center;
+}

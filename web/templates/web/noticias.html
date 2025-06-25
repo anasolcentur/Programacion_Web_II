@@ -1,0 +1,20 @@
+{% extends "web/base.html" %}
+{% block content %}
+<section class="noticias">
+    <div class="container">
+        <h2>Noticias Jurídicas Recientes</h2>
+        {% if noticias %}
+            {% for noticia in noticias %}
+                <div class="noticia">
+                    <h3>{{ noticia.title }}</h3>
+                    <p>{{ noticia.description }}</p>
+                    <a href="{{ noticia.url }}" target="_blank">Leer más</a>
+                    <hr>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No se encontraron noticias legales en este momento.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

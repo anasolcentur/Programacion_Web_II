@@ -1,0 +1,34 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="servicios" id="servicios">
+    <div class="container">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <div class="servicio-grid">
+            <div class="servicio-item">
+                <i class="fas fa-gavel"></i>
+                <h3>Asesoría Legal</h3>
+                <p>Asistencia jurídica especializada para empresas.</p>
+                <img src="{% static 'web/img/legal.jpg' %}" alt="Asesoría Legal" class="servicio-img">
+            </div>
+            <div class="servicio-item">
+                <i class="fas fa-calculator"></i>
+                <h3>Consultoría Contable</h3>
+                <p>Control fiscal y contable eficiente para el cumplimiento normativo.</p>
+                <img src="{% static 'web/img/contable.jpg' %}" alt="Consultoría Contable" class="servicio-img">
+            </div>
+            <div class="servicio-item">
+                <i class="fas fa-briefcase"></i>
+                <h3>Gestión Empresarial</h3>
+                <p>Optimización de procesos administrativos y estratégicos.</p>
+                <img src="{% static 'web/img/empresarial.jpg' %}" alt="Gestión Empresarial" class="servicio-img">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

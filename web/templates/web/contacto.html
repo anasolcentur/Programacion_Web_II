@@ -1,0 +1,108 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".contact-form");
+    form.addEventListener("submit", function(event) {
+        let nombre = document.getElementById("id_nombre").value.trim();
+        let email = document.getElementById("id_email").value.trim();
+        let telefono = document.getElementById("id_telefono").value.trim();
+        let mensaje = document.getElementById("id_mensaje").value.trim();
+
+        if (!nombre || nombre.length < 2) {
+            alert("Por favor, ingresá un nombre válido (mínimo 2 letras).");
+            event.preventDefault();
+        }
+
+        if (!email || !email.includes("@") || !email.includes(".")) {
+            alert("Por favor, ingresá un correo electrónico válido.");
+            event.preventDefault();
+        }
+
+        if (!telefono || isNaN(telefono) || telefono.length < 8) {
+            alert("Por favor, ingresá un número de teléfono válido (mínimo 8 dígitos).");
+            event.preventDefault();
+        }
+
+        if (!mensaje || mensaje.length < 10) {
+            alert("El mensaje debe contener al menos 10 caracteres.");
+            event.preventDefault();
+        }
+    });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="contacto" id="contacto">
+    <div class="container contacto-flex">
+
+        <!-- Formulario -->
+        <div class="contacto-formulario">
+            <h2 class="section-title">Solicitá Asesoría</h2>
+            <form method="POST" class="contact-form" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_nombre">Nombre:</label>
+                    {{ form.nombre }}
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="id_telefono">Teléfono:</label>
+                    {{ form.telefono }}
+                </div>
+                <div class="form-group">
+                    <label for="id_mensaje">Mensaje:</label>
+                    {{ form.mensaje }}
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+            {% if mensaje_enviado %}
+                <p class="mensaje-exito">Gracias por contactarte. Te responderemos pronto.</p>
+            {% endif %}
+        </div>
+
+        <!-- Opciones de consulta -->
+        <div class="contacto-opciones">
+            <h3>¿Sobre qué podés consultarnos?</h3>
+            <ul class="opciones-lista">
+                <li>
+                    <i class="fas fa-balance-scale"></i>
+                    <div>
+                        <strong>Problemas legales comerciales</strong>
+                        <p>Consultas sobre contratos, litigios, derechos y obligaciones empresariales.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                        <strong>Situación contable</strong>
+                        <p>Balance, impuestos, contabilidad mensual y más.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-users-cog"></i>
+                    <div>
+                        <strong>Gestión organizacional</strong>
+                        <p>Optimización de procesos, RRHH, y decisiones estratégicas.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-handshake"></i>
+                    <div>
+                        <strong>Planes de asesoría personalizada</strong>
+                        <p>Podés consultarnos por planes mensuales o por proyecto, adaptados a tus necesidades.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

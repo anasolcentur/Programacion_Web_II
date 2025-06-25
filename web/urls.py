@@ -1,0 +1,29 @@
+from django.urls import path
+from .views import (
+    index,
+    contacto_view,
+    servicios_view,
+    nosotros_view,
+    registro_view,
+    validar_cuenta_view,
+    login_view,
+    logout_view, 
+    noticias_view,
+    consultas_api_view,
+    dashboard_view,
+)
+
+urlpatterns = [
+    path('', index, name='index'),
+    path('contacto/', contacto_view, name='contacto'),
+    path('servicios/', servicios_view, name='servicios'),
+    path('nosotros/', nosotros_view, name='nosotros'),
+    path('registro/', registro_view, name='registro'),
+    path('validar/', validar_cuenta_view, name='validar_cuenta'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('noticias/', noticias_view, name='noticias'),
+    path('api/consultas/', consultas_api_view, name='consultas_api'),
+    path('dashboard/', dashboard_view, name='dashboard'),
+
+]

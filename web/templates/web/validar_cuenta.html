@@ -1,0 +1,21 @@
+{% extends "web/base.html" %}
+{% block content %}
+<section class="formulario">
+    <div class="container form-box">
+        <h2>Validar Cuenta</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="codigo">Código de validación:</label>
+            <input type="text" name="codigo" id="codigo" placeholder="Ingresá tu código" required>
+            <button type="submit" class="btn-primary">Validar</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

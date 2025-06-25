@@ -1,0 +1,68 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Asesoría Legal y Contable</h1>
+            <p>Confianza y profesionalismo para tu empresa</p>
+        </div>
+    </div>
+</section>
+
+<section class="valores">
+    <div class="container">
+        <h2 class="section-title">¿Por qué elegirnos?</h2>
+        <div class="valores-grid">
+            <div class="valor">
+                <i class="fas fa-handshake"></i>
+                <h3>Confianza</h3>
+                <p>Relaciones duraderas basadas en integridad y compromiso.</p>
+            </div>
+            <div class="valor">
+                <i class="fas fa-user-shield"></i>
+                <h3>Profesionalismo</h3>
+                <p>Equipo especializado en asesoría legal y contable.</p>
+            </div>
+            <div class="valor">
+                <i class="fas fa-chart-line"></i>
+                <h3>Resultados</h3>
+                <p>Enfoque en soluciones prácticas para el crecimiento empresarial.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="noticias">
+    <div class="container">
+        <h2 class="section-title">Lo último en el mundo empresarial</h2>
+        <div class="noticias-grid">
+            <article>
+                <h3>Reformas fiscales 2025</h3>
+                <p>Conocé los cambios que impactan en las PyMEs y cómo prepararte.</p>
+                <a href="#">Leer más</a>
+            </article>
+            <article>
+                <h3>¿Tu contrato está actualizado?</h3>
+                <p>5 claves para revisar los contratos comerciales en 2025.</p>
+                <a href="#">Leer más</a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>¿Listo para llevar tu empresa al siguiente nivel?</h2>
+        <a href="{% url 'contacto' %}" class="btn-cta">Solicitá una consulta</a>
+    </div>
+</section>
+
+
+{% endblock %}
