@@ -39,28 +39,40 @@
     </div>
 </section>
 
-<section class="noticias">
-    <div class="container">
-        <h2 class="section-title">Lo último en el mundo empresarial</h2>
-        <div class="noticias-grid">
-            <article>
-                <h3>Reformas fiscales 2025</h3>
-                <p>Conocé los cambios que impactan en las PyMEs y cómo prepararte.</p>
-                <a href="#">Leer más</a>
-            </article>
-            <article>
-                <h3>¿Tu contrato está actualizado?</h3>
-                <p>5 claves para revisar los contratos comerciales en 2025.</p>
-                <a href="#">Leer más</a>
-            </article>
-        </div>
-    </div>
+<section class="noticias" id="noticias">
+  <div class="container">
+    <h2 class="section-title">Noticias del sector legal y empresarial</h2>
+
+    {% if noticias %}
+      <div class="servicio-grid">
+        {% for noticia in noticias %}
+          <div class="servicio-item">
+            {% if noticia.image %}
+              <img src="{{ noticia.image }}" alt="Imagen noticia" class="servicio-img">
+            {% else %}
+              <i class="fas fa-newspaper" style="font-size: 3rem; color: #1a6f8a; margin-bottom: 1rem;"></i>
+            {% endif %}
+            <h3>{{ noticia.title }}</h3>
+            <p>{{ noticia.description|default:"(Sin descripción disponible)"|truncatewords:20 }}</p>
+            <a href="{{ noticia.url }}" target="_blank" class="card-link">Leer más</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No se pudieron cargar noticias en este momento.</p>
+    {% endif %}
+  </div>
 </section>
+
+
+
+
+
 
 <section class="cta">
     <div class="container">
         <h2>¿Listo para llevar tu empresa al siguiente nivel?</h2>
-        <a href="{% url 'contacto' %}" class="btn-cta">Solicitá una consulta</a>
+        <a href="{% url 'web:contacto' %}" class="btn-cta">Solicitá una consulta</a>
     </div>
 </section>
 

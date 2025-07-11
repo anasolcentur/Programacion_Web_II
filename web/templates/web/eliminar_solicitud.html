@@ -1,0 +1,14 @@
+{% extends "web/base.html" %}
+{% block content %}
+<section class="formulario">
+    <div class="container form-box">
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás segura de que querés eliminar esta solicitud de <strong>{{ solicitud.nombre }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-danger">Eliminar</button>
+            <a href="{% url 'web:dashboard' %}" class="btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

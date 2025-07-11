@@ -5,31 +5,35 @@
 <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector(".contact-form");
+    const form = document.getElementById("form-contacto");
+
     form.addEventListener("submit", function(event) {
-        let nombre = document.getElementById("id_nombre").value.trim();
-        let email = document.getElementById("id_email").value.trim();
-        let telefono = document.getElementById("id_telefono").value.trim();
-        let mensaje = document.getElementById("id_mensaje").value.trim();
+        let errores = [];
+
+        const nombre = document.getElementById("id_nombre").value.trim();
+        const email = document.getElementById("id_email").value.trim();
+        const telefono = document.getElementById("id_telefono").value.trim();
+        const mensaje = document.getElementById("id_mensaje").value.trim();
 
         if (!nombre || nombre.length < 2) {
-            alert("Por favor, ingresá un nombre válido (mínimo 2 letras).");
-            event.preventDefault();
+            errores.push("Por favor, ingresá un nombre válido (mínimo 2 letras).");
         }
 
         if (!email || !email.includes("@") || !email.includes(".")) {
-            alert("Por favor, ingresá un correo electrónico válido.");
-            event.preventDefault();
+            errores.push("Por favor, ingresá un correo electrónico válido.");
         }
 
         if (!telefono || isNaN(telefono) || telefono.length < 8) {
-            alert("Por favor, ingresá un número de teléfono válido (mínimo 8 dígitos).");
-            event.preventDefault();
+            errores.push("Por favor, ingresá un número de teléfono válido (mínimo 8 dígitos).");
         }
 
         if (!mensaje || mensaje.length < 10) {
-            alert("El mensaje debe contener al menos 10 caracteres.");
+            errores.push("El mensaje debe contener al menos 10 caracteres.");
+        }
+
+        if (errores.length > 0) {
             event.preventDefault();
+            alert(errores.join("\n"));
         }
     });
 });
@@ -43,23 +47,27 @@ document.addEventListener("DOMContentLoaded", function() {
         <!-- Formulario -->
         <div class="contacto-formulario">
             <h2 class="section-title">Solicitá Asesoría</h2>
-            <form method="POST" class="contact-form" novalidate>
+            <form method="POST" id="form-contacto" class="contact-form" novalidate>
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="id_nombre">Nombre:</label>
                     {{ form.nombre }}
+                    {{ form.nombre.errors }}
                 </div>
                 <div class="form-group">
                     <label for="id_email">Email:</label>
                     {{ form.email }}
+                    {{ form.email.errors }}
                 </div>
                 <div class="form-group">
                     <label for="id_telefono">Teléfono:</label>
                     {{ form.telefono }}
+                    {{ form.telefono.errors }}
                 </div>
                 <div class="form-group">
                     <label for="id_mensaje">Mensaje:</label>
                     {{ form.mensaje }}
+                    {{ form.mensaje.errors }}
                 </div>
                 <button type="submit">Enviar</button>
             </form>
@@ -105,4 +113,46 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </div>
 </section>
+
+{% if consultas %}
+<section class="consultas-privadas">
+    <div class="container">
+        <h2 class="section-title">Consultas recibidas</h2>
+        <div class="tabla-consultas-container">
+            <table class="tabla-consultas">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Mensaje</th>
+                        <th>Categoría</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consulta in consultas %}
+                    <tr>
+                        <td>{{ consulta.fecha|date:"d/m/Y H:i" }}</td>
+                        <td>{{ consulta.nombre }}</td>
+                        <td>{{ consulta.email }}</td>
+                        <td>{{ consulta.telefono }}</td>
+                        <td>{{ consulta.mensaje|truncatewords:15 }}</td>
+                        <td>{{ consulta.categoria }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="api-consultas-link" style="margin-top: 2rem; text-align: center;">
+    <p>Accedé a la API de consultas:</p>
+    <a href="{% url 'web:consultas_api' %}" target="_blank" class="btn-api">
+        Ver JSON de consultas
+    </a>
+</div>
+    </div>
+</section>
+{% endif %}
+
 {% endblock %}

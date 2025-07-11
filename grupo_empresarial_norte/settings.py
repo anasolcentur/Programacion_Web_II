@@ -2,14 +2,20 @@ from pathlib import Path
 import os
 import dj_database_url
 
+# Ruta base del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-e-f-#4oea=a!_v39ybt9%dp@9cs%d0%l2s(^f=x7u()%$+n*v2'
+# Clave secreta (para producción, usar variables de entorno)
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'clave-insegura-desarrollo')
 
 DEBUG = True
 
-ALLOWED_HOSTS = [os.getenv('RENDER_EXTERNAL_HOSTNAME', 'localhost')]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+RENDER_HOST = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_HOST:
+    ALLOWED_HOSTS.append(RENDER_HOST)
 
+# Aplicaciones instaladas
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -21,6 +27,7 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -32,13 +39,15 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+# Configuración de rutas
 ROOT_URLCONF = 'grupo_empresarial_norte.urls'
 
+# Sistema de plantillas corregido
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / "templates"],  
+        'APP_DIRS': True,  
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -52,12 +61,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'grupo_empresarial_norte.wsgi.application'
 
+# Configuración de base de datos
 DATABASES = {
     'default': dj_database_url.config(
         default='postgres://postgres:1029384756@localhost:5432/grupo_empresarial'
     )
 }
 
+# Validación de contraseñas
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -73,19 +84,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Localización
 LANGUAGE_CODE = 'es-ar'
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 USE_I18N = True
 USE_TZ = True
 
+# Archivos estáticos
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
     BASE_DIR / "web" / "static",
 ]
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# Campo por defecto para IDs en modelos
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configuración del correo

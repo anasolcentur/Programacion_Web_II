@@ -20,19 +20,18 @@
         <div class="container nav-container">
             <div class="logo">Grupo Empresarial Norte</div>
             <nav class="navbar">
-                <a href="{% url 'index' %}">Inicio</a>
-                <a href="{% url 'servicios' %}">Servicios</a>
-                <a href="{% url 'nosotros' %}">Nosotros</a>
-                <a href="{% url 'contacto' %}">Contacto</a>
+               <a href="{% url 'web:index' %}">Inicio</a>
+               <a href="{% url 'web:servicios' %}">Servicios</a>
+               <a href="{% url 'web:nosotros' %}">Nosotros</a>
+               <a href="{% url 'web:contacto' %}">Contacto</a>
 
      {% if user.is_authenticated %}
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        <form method="post" action="{% url 'web:logout' %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn-link">Cerrar sesión</button>
         </form>
     {% else %}
-        <a href="{% url 'login' %}" class="login-highlight">Iniciar sesión</a>
-    {% endif %}
+            <a href="{% url 'web:login' %}" class="login-highlight">Iniciar sesión</a>    {% endif %}
             </nav>
         </div>
     </header>
