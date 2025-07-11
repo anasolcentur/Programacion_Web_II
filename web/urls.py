@@ -32,5 +32,5 @@ urlpatterns = [
     path('dashboard/', dashboard_view, name='dashboard'),
     path('dashboard/editar/<int:solicitud_id>/', editar_solicitud_view, name='editar_solicitud'),
     path('dashboard/eliminar/<int:solicitud_id>/', eliminar_solicitud_view, name='eliminar_solicitud'),
-    path('crear-admin-temp/', views.crear_superusuario_temporal, name='crear_admin_temp'),
+path('crear-admin-temp/', crear_superusuario_temporal, name='crear_admin_temp')
 ]
