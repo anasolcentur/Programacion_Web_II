@@ -13,6 +13,9 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from .serializers import SolicitudSerializer
+from django.http import HttpResponse
+
+
 
 
 def index(request):
@@ -181,6 +184,17 @@ def validar_cuenta_view(request):
         else:
             messages.error(request, 'Código inválido.')
     return render(request, 'web/validar.html', {'codigo_ingresado': codigo_ingresado})
+
+def crear_superusuario_temporal(request):
+    if User.objects.filter(username='admin').exists():
+        return HttpResponse("El superusuario ya existe.")
+
+    User.objects.create_superuser(
+        username='admin',
+        email='admin@example.com',
+        password='Admin1234'
+    )
+    return HttpResponse("Superusuario creado. Usuario: admin | Contraseña: Admin1234")
 
 
 def login_view(request):

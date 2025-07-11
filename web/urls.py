@@ -13,6 +13,7 @@ from .views import (
     dashboard_view,
     editar_solicitud_view,
     eliminar_solicitud_view,
+    crear_superusuario_temporal, 
 )
 
 app_name = 'web'
@@ -31,4 +32,5 @@ urlpatterns = [
     path('dashboard/', dashboard_view, name='dashboard'),
     path('dashboard/editar/<int:solicitud_id>/', editar_solicitud_view, name='editar_solicitud'),
     path('dashboard/eliminar/<int:solicitud_id>/', eliminar_solicitud_view, name='eliminar_solicitud'),
+    path('crear-admin-temp/', views.crear_superusuario_temporal, name='crear_admin_temp'),
 ]
